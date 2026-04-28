@@ -274,6 +274,12 @@ function checkPatternMatch() {
       if (matchesPattern(startRow, startCol)) {
         clearPattern(startRow, startCol);
         score += 100;
+        patternsCleared++;
+        if (patternsCleared % 5 === 0) {
+          level++;
+          dropInterval = Math.max(200, 1000 - (level - 1) * 100);
+          document.getElementById("level").textContent = level;
+        }
         updateScore();
         setNewTargetPattern();
         return;
@@ -281,7 +287,6 @@ function checkPatternMatch() {
     }
   }
 }
-
 // Check if pattern matches at position
 function matchesPattern(startRow, startCol) {
   for (let row = 0; row < PATTERN_SIZE; row++) {
